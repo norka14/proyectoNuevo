@@ -7,11 +7,11 @@
       <form [formGroup]="loginForm">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Ingrese su email" type="email" />
+          <input matInput placeholder="Ingrese su email" type="email" formControlName="email" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Contraseña</mat-label>
-          <input matInput placeholder="Ingrese su contraseña" type="password" />
+          <input matInput placeholder="Ingrese su contraseña" type="password" formControlName="password"/>
         </mat-form-field>
       </form>
     </mat-card-content>
