@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Course } from './model/Course';
 import { mockCourses } from './data/mock';
 import { BehaviorSubject, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CoursesService {
   private courseSubject = new BehaviorSubject<Course[]>([]);
   courses$ = this.courseSubject.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.courseSubject.next(this.courses);
   }
 
