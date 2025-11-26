@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../../../core/services/courses/courses';
-
+import { formGroup } from './validators';
 @Component({
   selector: 'app-courses-form',
   standalone: false,
@@ -20,7 +20,7 @@ export class CoursesForm {
     private courseService: CoursesService,
     private router: Router
   ) {
-    this.createForm = this.fb.group(FormGroup);
+    this.createForm = this.fb.group(formGroup);
 
     this.route.params.subscribe((params) => {
       if (params['id']) {
