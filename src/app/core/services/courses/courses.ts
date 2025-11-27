@@ -28,14 +28,18 @@ export class CoursesService {
 
   getCourse(id: number) {
     return this.http.get<Course>(`${this.coursesUrl}/${id}`);
-    //return of(this.courses.find((course) => course.id === id));
   }
+  
   addCourse(course: Course) {
-    const newId = this.courses[this.courses.length - 1].id + 1;
+    const newId = String(Number(this.courses[this.courses.length - 1].id) + 1);
     course.id = newId;
 
+    console.log('Enviando al backend:', course);
+
     this.http.post<Course>(this.coursesUrl, course).subscribe((course) => {
-      this.courses.push(course);
+
+      console.log('Recibido del backend:', course);
+      //this.courses.push(course);
       this.courseSubject.next([...this.courses]);
     });
     

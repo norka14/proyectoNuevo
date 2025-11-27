@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../../../core/services/courses/courses';
 import { formGroup } from './validators';
+
 @Component({
   selector: 'app-courses-form',
   standalone: false,
@@ -34,6 +35,7 @@ export class CoursesForm {
       }
     });
   }
+  
   onSubmit(): void {
     if (this.isEditing) {
       this.courseService.updateCourse(this.createForm.value);
@@ -56,7 +58,8 @@ export class CoursesForm {
       this.createForm.get(inputName)?.dirty
     );
   }
-getError(inputName: 'title' | 'description' | 'beginDate' | 'endDate') {
+
+  getError(inputName: 'title' | 'description' | 'beginDate' | 'endDate') {
     if (!this.createForm.get(inputName)?.errors) {
       return null;
     }
@@ -85,5 +88,4 @@ getError(inputName: 'title' | 'description' | 'beginDate' | 'endDate') {
 
     return message;
   }
-
 }
