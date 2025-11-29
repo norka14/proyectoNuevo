@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Login } from './login';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../../shared/shared-module';
+import { DashboardRoutingModule } from '../../dashboard/dashboard-routing-module';
 
 describe('Login', () => {
   let component: Login;
@@ -8,7 +12,9 @@ describe('Login', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Login]
+      declarations: [Login],
+      imports: [CommonModule, SharedModule, DashboardRoutingModule],
+      providers:  [provideHttpClient(withFetch())]
     })
     .compileComponents();
 
