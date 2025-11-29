@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Courses } from './courses';
+import { CommonModule } from '@angular/common';
+import { CoursesRoutingModule } from './courses-routing-module';
+import { SharedModule } from '../../../shared/shared-module';
 
 describe('Courses', () => {
   let component: Courses;
@@ -8,9 +11,9 @@ describe('Courses', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Courses]
-    })
-    .compileComponents();
+      declarations: [Courses],
+      imports: [CommonModule,CoursesRoutingModule,SharedModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Courses);
     component = fixture.componentInstance;
