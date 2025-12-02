@@ -33,8 +33,8 @@ export class AuthService {
         }
 
         localStorage.setItem('token', user.email);
-        this.user = user;
-        this.router.navigate(['dashboard']);
+       
+        return user;
       })
     );
   }
