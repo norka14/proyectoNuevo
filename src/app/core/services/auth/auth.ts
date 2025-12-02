@@ -3,6 +3,7 @@ import { API_URL } from '../../utils/constants';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from './model/User';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +17,26 @@ export class AuthService {
 
   login(email: string, password: string) {
 
+    return of( 
       this.http.get<User[]>(this.usersUrl).subscribe((users) => {
-      const user = users.find((user) => user.email === email);
+        // Buscar el usuario en la lista
+        const user = users.find((user) => user.email === email);
 
-      if (!user) {
-        throw new Error('Email es inválido');
-      }
+        if (!user) {
+          // Si no existe, lanzamos un error
+          throw new Error('Email es invalido');
+        }
 
-      if (user.password !== password) {
-        throw new Error('Contraseña es inválida');
-      }
+        if (user.password !== password) {
+          // Si no existe, lanzamos un error
+          throw new Error('Credenciales inválidas');
+        }
 
-      localStorage.setItem('token', user.email);
-      this.user = user;
-      this.router.navigate(['dashboard']);
-    });
+        localStorage.setItem('token', user.email);
+        this.user = user;
+        this.router.navigate(['dashboard']);
+      })
+    );
   }
 
   logout() {
