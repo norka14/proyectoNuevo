@@ -3,12 +3,21 @@
     <h4>Platform Learning</h4>
 
     <mat-nav-list>
-      @for (item of listItems; track $index) {
+       @for (item of listItems; track $index) { @if ((user$ | async)?.role === 'USER') { @if
+      (item.name === 'Alumnos') {
+      <div></div>
+      } @else {
+
       <a mat-list-item [routerLink]="item.url">
         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
         <span matListItemLine>{{ item.name }}</span>
       </a>
-      }
+      } } @if ((user$ | async)?.role === 'ADMIN') {
+      <a mat-list-item [routerLink]="item.url">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemLine>{{ item.name }}</span>
+      </a>
+      } }
       <a mat-list-item (click)="logout()">
         <mat-icon matListItemIcon>logout</mat-icon>
         <span matListItemLine>Logout</span>
