@@ -86,14 +86,6 @@
       "beginDate": "2025-11-25T05:00:00.000Z",
       "endDate": "2025-11-27T05:00:00.000Z",
       "status": "STARTED"
-    },
-    {
-      "id": "9",
-      "title": "curso 9",
-      "description": "prueba9",
-      "beginDate": "2025-11-30T05:00:00.000Z",
-      "endDate": "2025-12-04T05:00:00.000Z",
-      "status": "FINISHED"
     }
   ],
   "students": []
