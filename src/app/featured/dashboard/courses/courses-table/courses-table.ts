@@ -3,6 +3,12 @@ import { Course, courseColumns } from '../../../../core/services/courses/model/C
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { CoursesService } from '../../../../core/services/courses/courses';
+import { Store } from '@ngrx/store';
+import { RootState } from '../../../../core/store';
+import { Observable } from 'rxjs';
+
+import { CoursesActions } from '../store/courses.actions';
+import { selectCourses, selectError, selectIsLoading } from '../store/courses.selectors';
 
 @Component({
   selector: 'app-courses-table',
@@ -15,14 +21,28 @@ export class CoursesTable {
   dataSource = new MatTableDataSource<Course>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  constructor(private courseService: CoursesService) {
-    this.courseService.courses$.subscribe((courses) => {
-      this.dataSource.data = courses;
-    });
+
+  courses$: Observable<Course[]>;
+  isLoading$: Observable<boolean>;
+  error$: Observable<any>;
+
+  constructor(private courseService: CoursesService, private store: Store<RootState>) {
+    this.courses$ = this.store.select(selectCourses);
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.error$ = this.store.select(selectError);
   }
 
   ngOnInit() {
-    this.courseService.getCourses();
+    this.store.dispatch(CoursesActions.loadCourses());
+
+    this.courses$.subscribe({
+      next: (courses) => {
+        this.dataSource.data = courses;
+      },
+      error: (error) => {
+        console.error('Error loading courses:', error);
+      },
+    });
   }
 
   ngAfterViewInit() {
@@ -33,13 +53,12 @@ export class CoursesTable {
     this.courseService.deleteCourse(id);
   }
 
-  applyFilter(event: Event){
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-
   }
 }

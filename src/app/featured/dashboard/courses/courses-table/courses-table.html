@@ -1,3 +1,7 @@
+@if (isLoading$ | async) {
+<mat-spinner></mat-spinner>
+} @else {
+
 <button id="create" mat-flat-button color="primary" routerLink="create">Crear Curso</button>
 
 <mat-form-field>
@@ -62,3 +66,4 @@
     aria-label="Select page of users"
   ></mat-paginator>
 </div>
+}

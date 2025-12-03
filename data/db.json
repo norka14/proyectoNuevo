@@ -56,7 +56,7 @@
       "status": "SCHEDULED"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "curso 5",
       "description": "prueb5",
       "beginDate": "2025-11-27T05:00:00.000Z",

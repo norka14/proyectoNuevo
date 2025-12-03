@@ -35,7 +35,7 @@ export class CoursesForm {
       }
     });
   }
-  
+
   onSubmit(): void {
     if (this.isEditing) {
       this.courseService.updateCourse(this.createForm.value);

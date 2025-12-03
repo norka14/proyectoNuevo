@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: Home,
-  },
+  }, 
   {
     path: 'courses',
     loadChildren: () => import('./courses/courses-module').then((m) => m.CoursesModule),
@@ -19,8 +19,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { 
-
-}
+export class DashboardRoutingModule {}

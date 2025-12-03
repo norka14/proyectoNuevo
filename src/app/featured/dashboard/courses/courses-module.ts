@@ -6,7 +6,12 @@ import { Courses } from './courses';
 import { CoursesTable } from './courses-table/courses-table';
 import { CoursesForm } from './courses-form/courses-form';
 import { SharedModule } from '../../../shared/shared-module';
-
+import { CoursesService } from '../../../core/services/courses/courses';
+import { StoreModule } from '@ngrx/store';
+import { coursesFeature } from './store/courses.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffect } from './store/courses.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,11 @@ import { SharedModule } from '../../../shared/shared-module';
   imports: [
     CommonModule,
     CoursesRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    StoreModule.forFeature(coursesFeature),
+    EffectsModule.forFeature([CoursesEffect]),
+    MatProgressSpinnerModule
+  ],
+  providers: [CoursesService],
 })
 export class CoursesModule { }
